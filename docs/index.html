@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RETA-ML — Cross-sensor anomaly classification</title>
+<style>
+  :root{
+    --blue:#1e6c87; --blue2:#2e89a7; --green:#4e8637; --yellow:#f2c334;
+    --ink:#1e1e1e; --muted:#5a5a5a; --line:#e4e4e0; --bg:#ffffff; --panel:#f7faf5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  header{background:var(--blue);color:#fff;padding:14px 0}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  header .brand{font-weight:700;letter-spacing:.02em}
+  header nav a{color:#cfe0f0;text-decoration:none;margin-left:18px;font-size:.95rem}
+  header nav a:hover{color:#fff}
+  .rule{height:6px;display:flex}
+  .rule i{flex:1}.rule .b{background:var(--blue2)}.rule .g{background:var(--green)}.rule .y{background:var(--yellow)}
+  .hero{padding:46px 0 30px}
+  .kicker{color:var(--green);font-weight:700;letter-spacing:.14em;font-size:.8rem;text-transform:uppercase}
+  h1{font-size:2.1rem;line-height:1.15;margin:.35em 0 .3em;color:var(--blue)}
+  .finding{font-size:1.45rem;font-weight:600;margin:.4em 0;max-width:820px}
+  .finding b{color:var(--green)}
+  .authors{color:var(--muted);margin-top:.6em}
+  .btns{margin:22px 0 4px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:11px 18px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.98rem}
+  .btn.primary{background:var(--blue);color:#fff}
+  .btn.ghost{border:1.5px solid var(--blue);color:var(--blue)}
+  .btn:hover{filter:brightness(1.06)}
+  section{padding:26px 0;border-top:1px solid var(--line)}
+  h2{color:var(--blue);font-size:1.35rem;margin:0 0 .5em}
+  figure{margin:0}
+  figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+  figcaption{color:var(--muted);font-size:.92rem;margin-top:.6em}
+  .tablewrap{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:.98rem;min-width:520px}
+  th,td{padding:8px 12px;text-align:center;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead tr:first-child th{color:var(--blue);border-bottom:2px solid #888}
+  tbody td.f1{background:#fbf3d6;font-weight:700;color:var(--green)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .card h3{margin:.1em 0 .3em;color:var(--blue);font-size:1.05rem}
+  .card p{margin:.2em 0;color:var(--muted);font-size:.94rem}
+  code{background:#f3f3f0;padding:1px 6px;border-radius:4px;font-size:.9em}
+  pre{background:#0f2430;color:#e8f0f4;padding:14px 16px;border-radius:8px;overflow-x:auto;font-size:.9rem}
+  footer{padding:24px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+  @media (prefers-color-scheme:dark){
+    :root{--ink:#e8e8e6;--muted:#a9b0ac;--line:#2b3a33;--bg:#12181a;--panel:#182420}
+    header{background:#123543}
+    code{background:#1c2622}pre{background:#0a1a20}
+    tbody td.f1{background:#2a2f18;color:#bcd98b}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="brand">RETA-ML</span>
+    <nav>
+      <a href="#figure">Result</a>
+      <a href="#results">Numbers</a>
+      <a href="#use">Use it</a>
+      <a href="https://github.com/Dozer3530/RETA-ML">GitHub&nbsp;↗</a>
+    </nav>
+  </div>
+</header>
+<div class="rule"><i class="b"></i><i class="g"></i><i class="y"></i></div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">Precision agriculture · automated data cleaning</div>
+    <h1>Cross-sensor anomaly classification of on-the-go proximal soil &amp; yield sensor data</h1>
+    <p class="finding">Machine learning can clean data from a sensor it has
+      <b>never seen</b> — but only the errors that <b>move with the machine</b>.</p>
+    <p class="authors">Zachary Komarnisky · Felippe H. S. Karp — Olds College of Agriculture &amp; Technology
+      · ICPA / ConBAP 2026, Porto Alegre, Brazil</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/Dozer3530/RETA-ML">Code &amp; trained models</a>
+    </div>
+  </div>
+
+  <section id="figure">
+    <h2>One sensor the model never trained on</h2>
+    <figure>
+      <img src="assets/three_panel.png" alt="Three-panel map: measured signal, expert-flagged errors, model-flagged errors on the held-out EM38 field">
+      <figcaption><b>(a)</b> what the sensor measured &nbsp;·&nbsp; <b>(b)</b> what an expert flagged
+        &nbsp;·&nbsp; <b>(c)</b> what the model flagged — on a held-out EM38 soil-conductivity field,
+        with the model trained only on the other two sensors.</figcaption>
+    </figure>
+  </section>
+
+  <section id="results">
+    <h2>What we found — leave-one-sensor-out</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th rowspan="2">Class</th><th colspan="3">Random Forest</th><th colspan="3">XGBoost</th></tr>
+          <tr><th>P</th><th>R</th><th>F1</th><th>P</th><th>R</th><th>F1</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Clean</td><td>0.96</td><td>0.94</td><td class="f1">0.95</td><td>0.96</td><td>0.85</td><td>0.90</td></tr>
+          <tr><td>Operational</td><td>0.46</td><td>0.63</td><td class="f1">0.52</td><td>0.30</td><td>0.65</td><td>0.40</td></tr>
+          <tr><td>Local</td><td>0.44</td><td>0.24</td><td class="f1">0.30</td><td>0.32</td><td>0.38</td><td>0.34</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted);margin-top:.8em">Macro-averaged over three held-out folds.
+      Random Forest macro-accuracy <b>0.90</b>, XGBoost 0.83. Clean data and operational
+      (machine-movement) errors transfer across sensors; local spatial anomalies do not —
+      the motivation for a spatially-explicit graph model next. Global class excluded
+      (n&nbsp;=&nbsp;14).</p>
+  </section>
+
+  <section>
+    <h2>Why it transfers — and where it breaks</h2>
+    <div class="grid">
+      <div class="card"><h3>Operational errors travel</h3>
+        <p>A headland turn is a headland turn on any machine — that kinematic signature is
+          sensor-independent, so the model carries it across.</p></div>
+      <div class="card"><h3>Spatial anomalies don't</h3>
+        <p>“Unusual for this neighbourhood” depends on each sensor's own value distribution,
+          so what's learned as locally weird on one sensor is meaningless on another.</p></div>
+      <div class="card"><h3>Sensor-agnostic by design</h3>
+        <p>13 features: field-relative motion + fixed-radius (15/30/45 m) spatial z-scores —
+          comparable across a soil sensor and a combine.</p></div>
+    </div>
+  </section>
+
+  <section id="use">
+    <h2>Use a trained model in a few lines</h2>
+<pre>import joblib, json
+from reta_ml.load import load_table
+from reta_ml.preprocess import preprocess_pipeline, recompute_value_stats
+from reta_ml.lofo_benchmark import _feature_matrix
+
+feats = json.load(open("models/feature_columns.json"))
+rf = joblib.load("models/random_forest.joblib")
+
+raw = load_table("your_field.gpkg", validate=False)   # bring your own sensor data
+raw["value"] = raw["&lt;your_value_column&gt;"]
+proc = preprocess_pipeline(raw, main_variable="value", local_stats_mode="fixedbands")
+proc = recompute_value_stats(proc, main_variable="value", local_stats_mode="fixedbands")
+pred = rf.predict(_feature_matrix(proc, feats))   # 0=Clean 1=Operational 2=Global 3=Local</pre>
+    <p style="color:var(--muted)">Full framework, the HeteroGAT graph model, and an
+      interactive Streamlit app are in the <a href="https://github.com/Dozer3530/RETA-ML">repository</a>.</p>
+  </section>
+
+  <footer>
+    Supported by an NSERC CCI Mobilize Grant (CCMOB-2024-00038), the Olds College Office of
+    Research Services, and the Werklund School of Agriculture Technology. ·
+    <a href="https://github.com/Dozer3530/RETA-ML">github.com/Dozer3530/RETA-ML</a>
+  </footer>
+</div>
+</body>
+</html>

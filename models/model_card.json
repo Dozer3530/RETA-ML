@@ -1,0 +1,60 @@
+{
+  "task": "Cross-sensor anomaly classification of on-the-go proximal soil / yield sensor data",
+  "classes": {
+    "0": "Clean",
+    "1": "Operational",
+    "2": "Global (excluded, n<15)",
+    "3": "Local"
+  },
+  "feature_columns": [
+    "bearing_deg",
+    "bearing_diff",
+    "time_dt",
+    "is_turn",
+    "is_short",
+    "speed_rel",
+    "dist_rel",
+    "accel_rel",
+    "global_z",
+    "z_score_15m",
+    "z_score_30m",
+    "z_score_45m",
+    "ratio_to_transect_mean"
+  ],
+  "config": "RF_XGB_FEATURES_FIXED_BANDS_NO_STD_NO_VALUE",
+  "config_notes": "seed 42, fixed 15/30/45 m local bands, field-relative motion, uncapped class balancing, no scaler, no raw value, single-stage.",
+  "training_data": "All expert-labeled points from EM38 ECa, Veris ECa and combine yield (three fields, each preprocessed independently). The annotated dataset itself is not distributed in this repository.",
+  "n_training_points": 49665,
+  "class_counts": {
+    "Clean": 46222,
+    "Operational": 2287,
+    "Global": 14,
+    "Local": 1142
+  },
+  "per_field_class_counts": {
+    "EM38 ECa": {
+      "Clean": 4386,
+      "Operational": 528,
+      "Global": 0,
+      "Local": 161
+    },
+    "Veris ECa": {
+      "Clean": 9487,
+      "Operational": 515,
+      "Global": 0,
+      "Local": 224
+    },
+    "Combine yield": {
+      "Clean": 32349,
+      "Operational": 1244,
+      "Global": 14,
+      "Local": 757
+    }
+  },
+  "models": {
+    "random_forest.joblib": "sklearn RandomForestClassifier(n_estimators=400, class_weight='balanced'). Load with joblib.load().",
+    "xgboost.json": "xgboost XGBClassifier(n_estimators=400, max_depth=6, learning_rate=0.05). Load with XGBClassifier().load_model().",
+    "heterogat_best_model.pt": "HeteroGAT graph neural network checkpoint (torch). The spatially-explicit next-step model; see reta_ml/model.py."
+  },
+  "evaluation_note": "Headline LOSO (leave-one-sensor-out) results reported on the poster/paper were computed per-fold; these shipped models are trained on ALL labeled data for downstream use."
+}

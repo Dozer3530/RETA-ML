@@ -1,0 +1,15 @@
+[
+  "bearing_deg",
+  "bearing_diff",
+  "time_dt",
+  "is_turn",
+  "is_short",
+  "speed_rel",
+  "dist_rel",
+  "accel_rel",
+  "global_z",
+  "z_score_15m",
+  "z_score_30m",
+  "z_score_45m",
+  "ratio_to_transect_mean"
+]
