@@ -1,5 +1,7 @@
 # RETA-ML
 
+<img width="867" height="980" alt="image (6)" src="https://github.com/user-attachments/assets/2d1738b9-fe1c-488a-9e84-7c98f29bc0fb" />
+
 A MACHINE LEARNING FRAMEWORK FOR AUTOMATED ANOMALY DETECTION IN PRECISION AGRICULTURE GEOSPATIAL DATA
 
 Zachary Komarnisky · Felippe H. S. Karp — Olds College of Agriculture & Technology
