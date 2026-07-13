@@ -51,7 +51,6 @@ requirements.txt / environment.yml   dependencies
 |---|---|
 | `random_forest.joblib` | Random Forest (400 trees, class-balanced), the poster's headline model. `joblib.load(...)`. |
 | `xgboost.json` | XGBoost (400 trees, depth 6). `XGBClassifier().load_model(...)`. |
-| `heterogat_best_model.pt` | HeteroGAT graph neural network checkpoint (torch) — the spatially-explicit next-step model. |
 | `model_card.json` | Feature list, config, training data, and per-class counts. |
 
 The RF/XGBoost models are trained on **all** expert-labeled points across the three sensors (49,665 points; the annotated
