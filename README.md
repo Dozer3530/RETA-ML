@@ -1,19 +1,19 @@
 # RETA-ML
 
-**Cross-sensor anomaly classification of on-the-go proximal soil and yield sensor data
-using machine learning.**
+**A MACHINE LEARNING FRAMEWORK FOR AUTOMATED ANOMALY DETECTION IN PRECISION AGRICULTURE GEOSPATIAL DATA
+**
 
 Zachary Komarnisky · Felippe H. S. Karp — Olds College of Agriculture & Technology
 Presented at the *17th International Conference on Precision Agriculture (ICPA) /
 11th Brazilian Congress on Precision and Digital Agriculture (ConBAP), 2026.*
 
-This is the public companion to the RETA-ML project. It ships the trained models and the
+This is the public repo to the RETA-ML project. It ships the trained models and the
 framework code — enough to inspect the models, run them on your own sensor data, and
 build on the work.
 
 ---
 
-## The idea in one line
+## What is the idea?
 
 > A model trained on some sensors can clean data from a sensor it has **never seen** —
 > but only the errors that *move with the machine*. Spatial anomalies don't transfer.
