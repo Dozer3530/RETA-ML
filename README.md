@@ -17,8 +17,7 @@ build on the work.
 > A model trained on some sensors can clean data from a sensor it has **never seen** —
 > but only the errors that *move with the machine*. Spatial anomalies don't transfer.
 
-On-the-go soil and yield sensors are fast but produce errors — headland turns, overlaps,
-speed changes, spatial spikes — that quietly corrupt precision-ag maps. Cleaning that
+On-the-go agriculture sensors are fast and useful but produce errors or include data that is not desirable for further analysis, things like headland turns, overlaps, speed changes, localized and global errors. These quietly reduce the quality in precision-ag maps. Cleaning that
 data is manual, slow, and different for every sensor. We ask whether one model can learn
 cleaning once and apply it across sensors, and we measure exactly where that transfer
 holds and where it breaks.
