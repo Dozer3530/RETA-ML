@@ -1,8 +1,8 @@
 # RETA-ML
 
-<img width="256" height="256" alt="ChatGPT Image Jul 13, 2026, 08_55_07 AM" src="https://github.com/user-attachments/assets/1e32ba57-0751-4a75-a1e3-6fb778fce247" />
+<p align="center"><img src="docs/assets/logo.png" width="220" alt="RETA-ML logo"></p>
 
-A MACHINE LEARNING FRAMEWORK FOR AUTOMATED ANOMALY DETECTION IN PRECISION AGRICULTURE GEOSPATIAL DATA
+**A Machine Learning Framework for Automated Anomaly Detection in Precision Agriculture Geospatial Data**
 
 Zachary Komarnisky · Felippe H. S. Karp — Olds College of Agriculture & Technology
 Presented at the *17th International Conference on Precision Agriculture (ICPA) /
@@ -16,25 +16,37 @@ build on the work.
 
 ## What is the idea?
 
-On-the-go agriculture sensors are fast and useful but produce errors or include data that is not desirable for further analysis, things like headland turns, overlaps, speed changes, localized and global errors. These quietly reduce the quality in precision-ag maps. Cleaning that
-data is manual, slow, and different for every sensor. We ask whether one model can learn
-cleaning once and apply it across sensors, and we measure exactly where that transfer
-holds and where it breaks.
+On-the-go agriculture sensors are fast and useful but produce errors or include data
+that is not desirable for further analysis, things like headland turns, overlaps,
+speed changes, localized and global errors. These quietly reduce the quality in
+precision-ag maps. Cleaning that data is manual, slow, and different for every sensor.
+We ask whether one model can learn cleaning once and apply it across sensors, and we
+measure exactly where that transfer holds and where it breaks.
+
+## Annotated data vs. ML-filtered data
+
+![Expert-annotated vs ML-filtered](docs/assets/annotated_vs_filtered.png)
+
+**(a)** every expert-labeled point on a held-out field — Clean, Operational, Global
+and Local classes. **(b)** the same field after running it through the shipped
+`random_forest.joblib`: everything the model doesn't predict as Clean is filtered out
+(shown faint grey), leaving the value surface behind.
 
 ## What we found (leave-one-sensor-out)
 
 Trained on two sensors, tested on the held-out third, macro-averaged over three folds:
 
-| Class | RF&nbsp;P | RF&nbsp;R | **RF&nbsp;F1** | XGB&nbsp;P | XGB&nbsp;R | XGB&nbsp;F1 |
+| Class | RF P | RF R | RF F1 | XGB P | XGB R | XGB F1 |
 |---|---|---|---|---|---|---|
-| Clean | 0.96 | 0.94 | **0.95** | 0.96 | 0.85 | 0.90 |
-| Operational | 0.46 | 0.63 | **0.52** | 0.30 | 0.65 | 0.40 |
-| Local | 0.44 | 0.24 | **0.30** | 0.32 | 0.38 | 0.34 |
+| Clean | 0.96 | 0.94 | 0.95 | 0.96 | 0.85 | 0.90 |
+| Operational | 0.46 | 0.63 | 0.52 | 0.30 | 0.65 | 0.40 |
+| Local | 0.44 | 0.24 | 0.30 | 0.32 | 0.38 | 0.34 |
 
-Random Forest macro-accuracy **0.90**, XGBoost 0.83. Clean data and operational errors
-(the kinematic ones) transfer across sensors; local spatial anomalies do not — they look
-different on every sensor, which motivates a spatially-explicit (graph) model next.
-*(Global-outlier class excluded from reporting: only 14 examples across all fields.)*
+Random Forest macro-accuracy 0.90, XGBoost 0.83. Clean data and operational errors
+(the kinematic ones) transfer across sensors; local spatial anomalies do not — they
+look different on every sensor, which motivates a spatially-explicit (graph) model
+next. (Global-outlier class excluded from reporting: only 14 examples across all
+fields.)
 
 ---
 
@@ -55,8 +67,9 @@ requirements.txt / environment.yml   dependencies
 | `xgboost.json` | XGBoost (400 trees, depth 6). `XGBClassifier().load_model(...)`. |
 | `model_card.json` | Feature list, config, training data, and per-class counts. |
 
-The RF/XGBoost models are trained on **all** expert-labeled points across the three sensors (49,665 points; the annotated
-dataset itself is not distributed in this repository) with the locked-in configuration: 13 sensor-agnostic features
+The RF/XGBoost models are trained on **all** expert-labeled points across the three
+sensors (49,665 points; the annotated dataset itself is not distributed in this
+repository) with the locked-in configuration: 13 sensor-agnostic features
 (field-relative motion + fixed-radius 15/30/45 m spatial z-scores), seed 42, no scaler.
 
 ---
@@ -98,10 +111,10 @@ streamlit run app.py
   15 / 30 / 45 m, and ratio to the transect mean. Deliberately *relative* and
   *fixed-radius* so the same feature vector is comparable across a soil sensor and a
   combine.
-- **Models:** Random Forest and XGBoost (class-balanced), with a HeteroGAT graph neural
-  network as the spatially-explicit next step.
-- **Evaluation:** Leave-One-Sensor-Out — train on two sensors, test on the third — the
-  honest test of cross-sensor transfer.
+- **Models:** Random Forest and XGBoost (class-balanced), with a HeteroGAT graph
+  neural network as the spatially-explicit next step.
+- **Evaluation:** Leave-One-Sensor-Out — train on two sensors, test on the third —
+  the honest test of cross-sensor transfer.
 
 ## Citation
 
