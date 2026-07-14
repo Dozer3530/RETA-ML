@@ -1,6 +1,6 @@
 # RETA-ML
 
-<p align="center"><img src="docs/assets/logo.png" width="220" alt="RETA-ML logo"></p>
+<img width="1024" height="1024" alt="ChatGPT Image Jul 13, 2026, 08_55_07 AM" src="https://github.com/user-attachments/assets/dd0b6cc2-6e51-4d7b-91b4-9b8aff15bf73" />
 
 **A Machine Learning Framework for Automated Anomaly Detection in Precision Agriculture Geospatial Data**
 
