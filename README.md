@@ -124,6 +124,10 @@ If you use this work, please cite the ICPA/ConBAP 2026 paper (Komarnisky & Karp,
 
 Released under the [MIT License](LICENSE).
 
+## Link to Github
+
+https://github.com/Dozer3530/RETA-ML/tree/main
+
 ## Acknowledgments
 
 Supported by an NSERC CCI Mobilize Grant (CCMOB-2024-00038), the Olds College Office of
